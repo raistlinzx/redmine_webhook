@@ -26,7 +26,7 @@ module RedmineWebhook
         :payload => {
           :action => 'opened',
           :issue => RedmineWebhook::IssueWrapper.new(issue).to_hash,
-          :url => controller.issue_url(issue)
+          :url => 'http://' + Setting.host_name + controller.issue_url(issue, :only_path => true)
         }
       }.to_json
     end
@@ -37,7 +37,7 @@ module RedmineWebhook
           :action => 'updated',
           :issue => RedmineWebhook::IssueWrapper.new(issue).to_hash,
           :journal => RedmineWebhook::JournalWrapper.new(journal).to_hash,
-          :url => controller.issue_url(issue)
+          :url => 'http://' + Setting.host_name + controller.issue_url(issue, :only_path => true)
         }
       }.to_json
     end
